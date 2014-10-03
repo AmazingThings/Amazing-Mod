@@ -1,0 +1,7 @@
+package com.github.AmazingThings.Amazing_Mod.block;
+
+import net.minecraft.block.Block;
+
+public class ElectricFurnace extends Block {
+
+}

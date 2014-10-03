@@ -1,0 +1,5 @@
+package com.github.AmazingThings.Amazing_Mod.renderer;
+
+public class TileEntityRendererElectricFurnace {
+
+}
