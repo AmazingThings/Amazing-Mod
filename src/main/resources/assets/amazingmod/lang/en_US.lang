@@ -1,2 +1,3 @@
-tile.electricfurnace.name=Electric furnace
-tile.electricfurnaceon.name=Electric furnace
+itemGroup.tabAmazing=AMAZING!
+tile.electricfurnace.name=Electric Furnace
+item.upgradespeed.name=Upgrade (Speed)
