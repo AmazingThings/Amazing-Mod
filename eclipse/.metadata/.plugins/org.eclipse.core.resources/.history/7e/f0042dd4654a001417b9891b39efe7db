@@ -1,7 +1,0 @@
-package com.github.AmazingThings.Amazing_Mod.tileentity;
-
-import net.minecraft.tileentity.TileEntity;
-
-public class TileEntityElectricFurnace extends TileEntity {
-
-}

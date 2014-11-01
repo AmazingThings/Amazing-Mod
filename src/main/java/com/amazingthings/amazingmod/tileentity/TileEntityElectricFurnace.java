@@ -20,7 +20,8 @@ public class TileEntityElectricFurnace extends TileEntity implements ISidedInven
 	private static final int[] slot_buttom = new int[]{2, 1};
 	private static final int[] slot_side = new int[]{1};
 	
-	public int speed = 150;
+	public int speedUpgrades = 0;
+	public int speed = 150 - speedUpgrades*20;
 	public int burnTime;
 	public int currentBurnTime;
 	public int cookTime;
@@ -58,12 +59,36 @@ public class TileEntityElectricFurnace extends TileEntity implements ISidedInven
 			}
 		}
 		
-		speed = tag.getInteger("speed");
+		speedUpgrades = tag.getInteger("speedUP");
+		speed = tag.getInteger("speed") - speedUpgrades*20;
 		burnTime = tag.getInteger("burnTime");
 		currentBurnTime = tag.getInteger("currentBurnTime");
 		cookTime = tag.getInteger("cookTime");
 		power = tag.getInteger("power");
 		tier = tag.getString("tier");
+	}
+	
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		
+		//TODO: Make this converted from the read version into a writing version
+		NBTTagList list = tag.getTagList("Items", 10);
+		slots = new ItemStack[this.getSizeInventory()];
+		for(int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound tagCom = list.getCompoundTagAt(i);
+			byte slotIndex = tagCom.getByte("Slot");
+			if(slotIndex >= 0 && slotIndex < slots.length) {
+				slots[slotIndex] = ItemStack.loadItemStackFromNBT(tagCom);
+			}
+		}
+		
+		tag.setInteger("speedUP", speedUpgrades);
+		tag.setInteger("speed", speed);
+		tag.setInteger("burnTime", burnTime);
+		tag.setInteger("currentBurnTime", currentBurnTime);
+		tag.setInteger("cookTime", cookTime);
+		tag.setInteger("power", power);
+		tag.setString("tier", tier);
 	}
 	
 	public void setGuiDisplayName(String name) {
@@ -86,49 +111,41 @@ public class TileEntityElectricFurnace extends TileEntity implements ISidedInven
 
 	@Override
 	public ItemStack getStackInSlot(int p_70301_1_) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub
 		
 	}
 
